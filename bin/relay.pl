@@ -9,17 +9,29 @@ use Text::ZPL;
 use Net::Async::HTTP;
 use IO::Async::Stream;
 use IO::Socket::IP;
+use IO::Async::Timer::Periodic;
+use URI;
 use Data::Dumper;
+use lib '../lib';
+use Telegram;
 
-our ($loop, $conf, $http, $ircSocket, $ircStream, $proto);
+our ($loop, $conf, $http, $ircSocket, $ircStream, $proto, $timer, $telegram);
 
 readConfig();
 setupLoop();
 setupIRC();
+$telegram = Telegram->new;
 
 sub setupLoop {
   $loop = IO::Async::Loop->new;
   $http = Net::Async::HTTP->new;
+  $timer = IO::Async::Timer::Periodic->new(
+    interval => 1,
+    on_tick => sub { $telegram->getUpdates; }
+  );
+  $timer->start;
+  $loop->add($http);
+  $loop->add($timer);
 }
 
 sub setupIRC {
