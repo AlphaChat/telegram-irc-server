@@ -1,0 +1,10 @@
+IRC
+  * Keep track of linked channels
+  * Implement: User tracking (nick changes, connections, quits)
+               Linked channel tracking (messages, joins, parts, kicks, topic changes)
+               Private message tracking (when a client bot is PM'd, relay to telegram user)
+Telegram
+   * Parse messages, join, part
+   * download and store photos, stickers, voice notes, etc.
+   * users on telegram need to be created on irc when they talk since we can't get a list of users from telegram
+
