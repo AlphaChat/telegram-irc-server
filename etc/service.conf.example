@@ -1,0 +1,21 @@
+# IRC Config
+irc
+  link
+    host = "127.0.0.1"
+    port = 6697
+    password = "linkage"
+  server
+    name = "telegram.relay"
+    sid  = "1TG"
+  bot
+    nick = "Telegram"
+    user = "Telegram"
+    host = "telegram.org"
+# Telegram Config
+telegram
+  token = "telegram:token"
+# Media Storage
+media
+  http
+    host = "0.0.0.0"
+    port = 8080
